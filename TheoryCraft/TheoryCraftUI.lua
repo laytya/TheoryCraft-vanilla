@@ -705,9 +705,9 @@ if not SM_FindSpell then
 	SM_FindSpell = TC_FindSpell
 end
 
-local function GetMacroSpellData(button, spelldata)
+local function GetMacroSpellData(button, spelldata, actionid)
 	if not spelldata then
-		local actionid=ActionButton_GetPagedID(button);
+		if not actionid then actionid = ActionButton_GetPagedID(button); end
 		local macroname=GetActionText(actionid);
 		local actiontype, spell = nil, nil
 		local id, book, texture, spell
@@ -850,6 +850,7 @@ function TheoryCraft_ButtonUpdate()
 			TCTooltip:SetOwner(UIParent,"ANCHOR_NONE")
 			TCTooltip:SetAction(buttontext:GetParent():GetID())
 			spelldata = TheoryCraft_GetSpellDataByFrame(TCTooltip)
+			spelldata = GetMacroSpellData(this, spelldata)
 		elseif buttontext.type == "Flippable" then
 			
 			
@@ -866,6 +867,7 @@ function TheoryCraft_ButtonUpdate()
 			TCTooltip:SetOwner(UIParent,"ANCHOR_NONE")
 			TCTooltip:SetAction(buttontext.actionbutton)
 			spelldata = TheoryCraft_GetSpellDataByFrame(TCTooltip)
+			spelldata = GetMacroSpellData(this, spelldata, buttontext.actionbutton)
 		elseif buttontext.type == "Gypsy" then
 			TCTooltip:SetOwner(UIParent,"ANCHOR_NONE")
 			TCTooltip:SetAction(Gypsy_ActionButton_GetPagedID (this))

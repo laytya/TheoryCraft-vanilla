@@ -582,7 +582,8 @@ function TheoryCraft_GLOCK_UpdateResist(this, arg1)
 	getglobal("TheoryCraftresist"..this.TCType):SetText(TheoryCraft_Settings["resistscores"][this.TCType])
 end
 
-	if BActionButton and type(BActionButton) == "table" then
+-- Support for Bongos
+if BActionButton and type(BActionButton) == "table" then
 		TheoryCraft_Data["oldBongo"] = BActionButton.Create
 		function TheoryCraft_BActionButtonCreate(index, bar)
 			local tmp = TheoryCraft_Data["oldBongo"](index, bar)
@@ -590,7 +591,7 @@ end
 			return tmp
 		end
 		BActionButton.Create = TheoryCraft_BActionButtonCreate
-	end
+end
 
 function TheoryCraft_OnEvent()
 	local UIMem = gcinfo()
